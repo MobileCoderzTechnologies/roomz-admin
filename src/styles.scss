@@ -12,6 +12,7 @@ html {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
 }
 
 .txt-info {
@@ -24,6 +25,10 @@ body {
 
 .txt-success {
   color: $success-color;
+}
+
+.txt-white{
+  color: $white-color;
 }
 
 .alert {
@@ -43,3 +48,4 @@ body {
   border-radius: 1rem !important;
   padding: 2rem !important;
 }
+

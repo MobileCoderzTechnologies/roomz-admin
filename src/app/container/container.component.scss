@@ -1,0 +1,48 @@
+@import "../../styles/core";
+
+.drawer {
+  box-sizing: border-box;
+  width: 25rem;
+  height: 100vh;
+}
+
+.drawer-content {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.drawer-content-box {
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+::ng-deep .mat-drawer-inner-container {
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.menu {
+  height: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
+.menu-item-active{
+  background-color: $white-color;
+}
+
+.loading{
+  box-sizing: border-box;
+  height: 83vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}

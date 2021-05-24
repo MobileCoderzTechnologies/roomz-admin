@@ -1,0 +1,23 @@
+<div class="login-container bg-gradient">
+  <div class="login-box mat-elevation-z8">
+    <h1><span class="txt-primary">Log</span> <span class="txt-accent">In</span></h1>
+    <form [formGroup]="loginForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Email : </mat-label>
+        <mat-icon matPrefix>mail</mat-icon>
+        <input type="email" matInput formControlName="email" placeholder="email" required>
+        <mat-error> {{loginForm.controls.email.errors|validateError:'Email '}} </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Password : </mat-label>
+        <mat-icon matPrefix>lock_outline</mat-icon>
+        <input type="password" matInput formControlName="password" placeholder="enter password" required>
+        <mat-error> {{loginForm.controls.password.errors|validateError:'Password '}} </mat-error>
+      </mat-form-field>
+      <br>
+      <button mat-button routerLink="{{forgotPasswordRoute.url}}" class="txt-accent">Forgot Password?</button>
+      <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>

@@ -1,21 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { LOGIN_ROUTE, SIGN_UP_ROUTE } from './constants/route.constants';
+import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from './constants/route.constants';
+import { ContainerComponent } from './container/container.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: LOGIN_ROUTE.path,
-    pathMatch: 'full'
+    component: ContainerComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: DASHBOARD_ROUTE.path,
+        pathMatch: 'full'
+      },
+      {
+        path: DASHBOARD_ROUTE.path,
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: USER_ROUTE.path,
+        loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: CHANGE_PASSWORD_ROUTE.path,
+        component: ChangePasswordComponent
+      }
+    ]
   },
   {
     path: LOGIN_ROUTE.path,
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
+    component: LoginComponent
   },
   {
-    path: SIGN_UP_ROUTE.path,
-    loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpModule)
+    path: FORGOT_PASSWORD_ROUTE.path,
+    component: ForgotPasswordComponent
   },
   {
     path: '**',

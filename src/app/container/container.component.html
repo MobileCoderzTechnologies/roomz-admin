@@ -1,0 +1,43 @@
+<mat-drawer-container>
+  <mat-drawer #drawer [mode]="mode" [opened]="opened" class="drawer">
+    <mat-toolbar color="primary" (click)="onClickRoomzLogo()">
+      Roomz
+    </mat-toolbar>
+    <div class="menu">
+      <mat-list>
+        <mat-list-item class="menu-item" routerLink={{dashboardRoute.url}} routerLinkActive="txt-primary">
+          <mat-icon mat-list-icon>dashboard</mat-icon>
+          <div mat-line>Dashboard</div>
+        </mat-list-item>
+        <mat-list-item class="menu-item" routerLink={{userRoute.url}} routerLinkActive="txt-primary">
+          <mat-icon mat-list-icon>peoples</mat-icon>
+          <div mat-line>User List</div>
+        </mat-list-item>
+        <mat-list-item class="menu-item" routerLink={{changePasswordRoute.url}} routerLinkActive="txt-primary">
+          <mat-icon mat-list-icon>fingerprint</mat-icon>
+          <div mat-line>Change Password</div>
+        </mat-list-item>
+        <mat-list-item class="menu-item" routerLinkActive="txt-primary">
+          <mat-icon mat-list-icon>logout</mat-icon>
+          <div mat-line>Logout</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="drawer-content">
+    <mat-toolbar color="primary" class="header">
+      <button mat-icon-button *ngIf="mode==='over'" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h2>Roomz Admin</h2>
+    </mat-toolbar>
+    <div class="drawer-content-box">
+      <div [style.display]="isLoading?'none':'block'">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="loading" [style.display]="isLoading?'grid':'none'">
+        <mat-spinner [strokeWidth]="5" color="accent"></mat-spinner>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

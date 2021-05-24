@@ -24,7 +24,9 @@
   .txt-warn{
     color: $warn-color !important;
   }
-
+  .txt-accent{
+    color: $accent-color;
+  }
   .bg-primary{
     background-color: $primary-color !important;
   }
@@ -35,5 +37,24 @@
 
   .bg-warn{
     background-color: $warn-color !important;
+  }
+
+  .border-primary{
+    border-color: $primary-color !important;
+  }
+
+  .bg-gradient{
+    background: linear-gradient(to right, $primary-color 0%,$primary-color 50%, $primary-color, $accent-color 50%, $accent-color);
+  }
+
+  .content{
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    border: 1px solid $primary-color;
+    h2{
+      color: $accent-color;
+    }
   }
 }

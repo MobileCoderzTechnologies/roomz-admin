@@ -1,18 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignUpComponent } from './sign-up.component';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StaticComponent } from './components/static/static.component';
 
 const routes: Routes = [
   {
-    path: '', component: SignUpComponent
+    path: '',
+    component: StaticComponent
   }
 ];
 
 @NgModule({
-  declarations: [
-    SignUpComponent
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
@@ -21,4 +19,5 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class SignUpModule { }
+
+export class DashboardRoutingModule { }
