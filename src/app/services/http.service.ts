@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { AlertService } from '../modules/alert/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class HttpService {
   constructor(
     private $http: HttpClient,
     private $router: Router,
+    private $alert: AlertService
   ) { }
 
   get(url: string, params?: any): Observable<any> {
@@ -53,6 +55,7 @@ export class HttpService {
     const error = response.error;
     const status = response.status;
     const message = response.message;
+    this.$alert.danger(message);
     if (status === 401) {
       sessionStorage.clear();
       localStorage.clear();

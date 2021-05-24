@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-
+    const loginData = this.loginForm.value;
+    this.$loginService.logIn(loginData).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

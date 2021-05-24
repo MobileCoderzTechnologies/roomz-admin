@@ -11,22 +11,22 @@ export class AlertService {
   ) { }
 
 
-  success(message: string, duration: number = 2000): void {
-    this.$snackBar.open(message, '', {
+  success(message: string, action: string = 'close', duration: number = 2000): void {
+    this.$snackBar.open(message, action, {
       duration,
       panelClass: ['alert', 'alert-success']
     });
   }
 
-  danger(message: string, duration: number = 2000): void {
-    this.$snackBar.open(message, '', {
+  danger(message: string, action: string = 'close', duration: number = 2000): void {
+    this.$snackBar.open(message, action, {
       duration,
       panelClass: ['alert', 'alert-danger']
     });
   }
 
-  info(message: string, duration: number = 1000): void {
-    this.$snackBar.open(message, '', {
+  info(message: string, action: string = 'close', duration: number = 1000): void {
+    this.$snackBar.open(message, action, {
       duration,
       panelClass: ['alert', 'alert-info']
     });

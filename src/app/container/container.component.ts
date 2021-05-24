@@ -41,7 +41,8 @@ export class ContainerComponent implements OnInit, AfterViewInit {
     this.isHandset
       .pipe(
         delay(0)
-      ).subscribe((data) => {
+      )
+      .subscribe((data) => {
         if (data) {
           this.mode = 'over';
           this.opened = false;

@@ -3,7 +3,7 @@
 
 @include mat-core();
 
-$roomz-frontend-primary: mat-palette($mat-pink, A400);
+$roomz-frontend-primary: mat-palette($mat-pink, 500, A100, A50);
 $roomz-frontend-accent: mat-palette($mat-light-blue);
 
 $roomz-frontend-warn: mat-palette($mat-red);
