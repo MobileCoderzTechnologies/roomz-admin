@@ -7,6 +7,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from './constants/route.constants';
 import { ContainerComponent } from './container/container.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ProtectGuard } from './guards/protect.guard';
 
 const routes: Routes = [
   {
@@ -35,11 +36,13 @@ const routes: Routes = [
   },
   {
     path: LOGIN_ROUTE.path,
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [ProtectGuard]
   },
   {
     path: FORGOT_PASSWORD_ROUTE.path,
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
+    canActivate: [ProtectGuard]
   },
   {
     path: '**',

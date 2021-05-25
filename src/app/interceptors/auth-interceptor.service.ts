@@ -16,12 +16,11 @@ export class AuthInterceptorService {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.$loadingService.isLoading.next(true);
 
-    // const userData = JSON.parse(localStorage.getItem('userData'));
-    // if (userData) {
-    //   const { token } = userData.accessToken;
-    //   const Authorization = `Bearer ${token}`;
-    //   req = req.clone({ setHeaders: { Authorization } });
-    // }
+    const adminAccessToken = localStorage.getItem('adminAccessToken');
+    if (adminAccessToken) {
+      const Authorization = `Bearer ${adminAccessToken}`;
+      req = req.clone({ setHeaders: { Authorization } });
+    }
     return next.handle(req).pipe(
       delay(5),
       finalize(

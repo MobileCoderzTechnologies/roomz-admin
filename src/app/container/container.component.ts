@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, USER_ROUTE } from '../constants/route.constants';
+import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from '../constants/route.constants';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   isHandset = new BehaviorSubject<boolean>(false);
   @ViewChild('drawer') drawer: MatDrawer;
   constructor(
-    private $loader: LoadingService
+    private $loader: LoadingService,
+    private $router: Router
   ) {
     fromEvent(window, 'resize').subscribe(data => {
       if (window.innerWidth < 600) {
@@ -65,6 +67,12 @@ export class ContainerComponent implements OnInit, AfterViewInit {
     if (this.mode === 'over') {
       this.drawer.toggle();
     }
+  }
+
+
+  logOut(): void {
+    localStorage.removeItem('adminAccessToken');
+    this.$router.navigateByUrl(LOGIN_ROUTE.url);
   }
 
 }
