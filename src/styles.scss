@@ -27,7 +27,7 @@ body {
   color: $success-color;
 }
 
-.txt-white{
+.txt-white {
   color: $white-color;
 }
 
@@ -49,3 +49,23 @@ body {
   padding: 2rem !important;
 }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: scroll;
+  @include desktop-device {
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+    box-sizing: border-box;
+  }
+  table {
+    width: 100%;
+    min-width: 65rem;
+    .data-row:hover {
+      background-color: $table-row-hover;
+    }
+  }
+}

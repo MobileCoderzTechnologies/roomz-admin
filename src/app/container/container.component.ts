@@ -27,8 +27,11 @@ export class ContainerComponent implements OnInit, AfterViewInit {
     private $loader: LoadingService,
     private $router: Router
   ) {
+    if (window.innerWidth < 980) {
+      this.isHandset.next(true);
+    }
     fromEvent(window, 'resize').subscribe(data => {
-      if (window.innerWidth < 600) {
+      if (window.innerWidth < 980) {
         this.isHandset.next(true);
       } else {
         this.isHandset.next(false);
