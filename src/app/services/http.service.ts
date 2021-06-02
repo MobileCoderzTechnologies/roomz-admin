@@ -54,7 +54,7 @@ export class HttpService {
   private errorHandler(response: any): Observable<{ error: string, message: string }> {
     const error = response.error;
     const status = response.status;
-    const message = response.message;
+    const message = error.message;
     this.$alert.danger(message);
     if (status === 401) {
       sessionStorage.clear();

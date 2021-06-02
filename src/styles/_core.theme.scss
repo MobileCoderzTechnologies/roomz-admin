@@ -11,50 +11,90 @@
   $primary-color: mat-color($primary);
   $accent-color: mat-color($accent);
   $warn-color: mat-color($warn);
-  $text-color: map-get($foreground, 'text');
+  $text-color: map-get($foreground, "text");
   $secondary-color: map-get($foreground, secondary-text);
   $disabled-color: map-get($foreground, disabled-text);
 
-  .txt-primary{
+  .txt-primary {
     color: $primary-color !important;
   }
-  .txt-secondary{
+  .txt-secondary {
     color: $secondary-color !important;
   }
-  .txt-warn{
+  .txt-warn {
     color: $warn-color !important;
   }
-  .txt-accent{
+  .txt-accent {
     color: $accent-color;
   }
-  .bg-primary{
+  .border-accent {
+    border: 0.1rem solid $accent-color;
+  }
+  .bg-primary {
     background-color: $primary-color !important;
   }
 
-  .bg-accent{
+  .bg-accent {
     background-color: $accent-color !important;
   }
 
-  .bg-warn{
+  .bg-warn {
     background-color: $warn-color !important;
   }
 
-  .border-primary{
+  .border-primary {
     border-color: $primary-color !important;
   }
 
-  .bg-gradient{
-    background: linear-gradient(to right, $primary-color 0%,$primary-color 50%, $primary-color, $accent-color 50%, $accent-color);
+  .bg-gradient {
+    background: linear-gradient(
+      to right,
+      $primary-color 0%,
+      $primary-color 50%,
+      $primary-color,
+      $accent-color 50%,
+      $accent-color
+    );
   }
 
-  .content{
+  .content {
     height: auto;
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
     border: 1px solid $primary-color;
-    h2{
+    h1 {
+      // width: 100%;
+      margin-left: 2rem;
+      text-decoration: underline;
       color: $accent-color;
+      font-weight: bold;
+    }
+  }
+
+  .total-box {
+    color: $primary-color;
+    border: 0.1rem solid $primary-color;
+    border-radius: 0.6rem;
+    background-color: #fff;
+    padding: 0.4rem;
+  }
+
+  .search-bar {
+    border-bottom: 0.1rem solid $primary-color;
+    width: 30%;
+    height: 3rem;
+    background-color: #fff;
+    input {
+      border: none;
+      outline: none;
+      height: 100%;
+      width: 100%;
+      font-size: 1.6rem;
+      &::placeholder{
+        color: $accent-color;
+        height: 3rem;
+      }
     }
   }
 }

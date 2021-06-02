@@ -26,7 +26,7 @@ export class LoginService {
   }
 
   changePassword(data: { old_password: string; new_password: string; confirm_password: string }): Observable<{ message: string }> {
-    return this.$http.post('change_password', data);
+    return this.$http.post('change-password', data);
   }
 }
 

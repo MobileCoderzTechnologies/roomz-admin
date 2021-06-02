@@ -1,0 +1,47 @@
+@import "core";
+
+.mid-bar{
+  display: flex;
+  justify-content: space-between;
+}
+.users-table {
+  width: 100%;
+}
+
+
+
+.user-image{
+  padding: 0.2rem;
+  img{
+    height: 5rem;
+    width: 5rem;
+  }
+}
+.view-btn{
+  background-color: inherit;
+  outline: none;
+  cursor: pointer;
+  // color: $info-color;
+  // border: 0.1rem solid $info-color;
+}
+.action {
+  button {
+    background-color: inherit;
+    outline: none;
+    border: 0.1rem solid $danger-color;
+    border-radius: 0.9rem;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+}
+
+.data-row {
+  position: relative;
+  td {
+    position: relative;
+  }
+}
+
+.data-row:hover {
+  background-color: $table-row-hover;
+}

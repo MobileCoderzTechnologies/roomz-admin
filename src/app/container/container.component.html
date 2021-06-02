@@ -1,8 +1,9 @@
 <mat-drawer-container>
   <mat-drawer #drawer [mode]="mode" [opened]="opened" class="drawer">
-    <mat-toolbar color="primary" (click)="onClickRoomzLogo()">
-      Roomz
-    </mat-toolbar>
+    <div class="logo-box">
+      <img src="assets/images/logo.png" (click)="onClickRoomzLogo()">
+    </div>
+    <hr>
     <div class="menu">
       <mat-list>
         <mat-list-item class="menu-item" routerLink={{dashboardRoute.url}} routerLinkActive="txt-primary">
