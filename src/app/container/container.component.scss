@@ -28,6 +28,8 @@
 .logo-box{
   background-color: $white-12-opacity;
   height: 5.6rem;
+  display: grid;
+  place-items: center;
 }
 
 .menu {
