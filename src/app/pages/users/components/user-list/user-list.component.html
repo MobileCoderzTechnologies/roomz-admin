@@ -62,10 +62,10 @@
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let user">
           <div class="action">
-            <mat-slide-toggle [checked]="user?.is_verified" (change)="statusChange($event, user.id)">
+            <mat-slide-toggle [checked]="user?.is_active" (change)="statusChange($event, user.uid)">
             </mat-slide-toggle>
 
-            <button class="txt-warn">delete</button>
+            <button (click)="deleteUser(user.uid)" class="txt-warn">delete</button>
           </div>
         </td>
       </ng-container>

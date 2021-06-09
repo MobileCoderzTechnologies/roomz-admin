@@ -4,6 +4,7 @@ import { Sort } from '@angular/material/sort';
 import { from, fromEvent } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/modals/user.modal';
+import { AlertService } from 'src/app/modules/alert/alert.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -23,9 +24,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   sort = '';
   search = '';
 
+
+
   searchElement: HTMLElement;
   constructor(
-    private $userService: UserService
+    private $userService: UserService,
+    private $alert: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +46,10 @@ export class UserListComponent implements OnInit, AfterViewInit {
       this.search
     ).subscribe(data => {
       this.users = data.users;
+      this.users = this.users.map(e => {
+        e.is_active = Boolean(e.is_active);
+        return e;
+      });
       this.totalUser = data.perPage * (data.totalPages - 1) + data.totalNumber;
     });
   }
@@ -77,7 +85,18 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   statusChange(isActive: boolean, userId: string): void {
+    this.$userService.toggleStatusOfUser(userId).subscribe(data => {
+      this.$alert.success(data.message);
+      this.getUserList();
+      console.log(data);
+    });
+  }
 
+  deleteUser(userId: string): void {
+    this.$userService.deleteUser(userId).subscribe(data => {
+      this.$alert.info(data.message);
+      this.getUserList();
+    });
   }
 
 }

@@ -21,6 +21,14 @@ export class UserService {
     }
     return this.$http.get('users-list', params);
   }
+
+  deleteUser(userId: string): Observable<{ message: string, status: number }> {
+    return this.$http.delete(`delete-user/${userId}`);
+  }
+
+  toggleStatusOfUser(userId: string): Observable<{ status: number, message: string, user: User }> {
+    return this.$http.put(`toggle-status/${userId}`, '');
+  }
 }
 
 interface UserList {
