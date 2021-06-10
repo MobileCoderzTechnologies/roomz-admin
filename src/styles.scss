@@ -52,6 +52,11 @@ body {
 .table-responsive {
   width: 100%;
   overflow-x: scroll;
+  .no-data{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   @include desktop-device {
     &::-webkit-scrollbar {
       width: 0 !important;

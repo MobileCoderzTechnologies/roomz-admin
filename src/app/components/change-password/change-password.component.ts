@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DASHBOARD_ROUTE } from 'src/app/constants/route.constants';
+import { PASSWORD_REGEX } from 'src/app/constants/regex.constant';
+import { DASHBOARD_ROUTE, LOGIN_ROUTE } from 'src/app/constants/route.constants';
 import { AlertService } from 'src/app/modules/alert/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -14,7 +15,11 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm: FormGroup = new FormGroup({
     old_password: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.minLength(7)]),
-    new_password: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.minLength(7)]),
+    new_password: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(15),
+      Validators.minLength(7),
+      Validators.pattern(PASSWORD_REGEX)]),
     confirm_password: new FormControl('', [Validators.required])
   },
     { validators: [this.matchPasswords('new_password', 'confirm_password')] }
@@ -34,7 +39,8 @@ export class ChangePasswordComponent implements OnInit {
       console.log(data);
       this.changePasswordForm.reset();
       this.$alert.success(data.message);
-      this.$router.navigate([DASHBOARD_ROUTE.url]);
+      localStorage.removeItem('adminAccessToken');
+      this.$router.navigate([LOGIN_ROUTE.url]);
     });
   }
 

@@ -17,7 +17,10 @@ export class LoginService {
   loginForm(): FormGroup {
     return this.$fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(15)]]
+      password: ['', [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(15)]]
     });
   }
 

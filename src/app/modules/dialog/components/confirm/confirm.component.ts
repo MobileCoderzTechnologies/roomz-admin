@@ -28,6 +28,7 @@ export class ConfirmComponent implements OnInit {
 
 export interface ConfirmDialog {
   message: string;
+  message2: string;
   yBtnTxt: string;
   nBtnTxt: string;
 }

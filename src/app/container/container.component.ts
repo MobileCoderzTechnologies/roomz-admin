@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from '../constants/route.constants';
+import { DialogService } from '../modules/dialog/service/dialog.service';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   @ViewChild('drawer') drawer: MatDrawer;
   constructor(
     private $loader: LoadingService,
-    private $router: Router
+    private $router: Router,
+    private $dialogService: DialogService
   ) {
     if (window.innerWidth < 980) {
       this.isHandset.next(true);
@@ -74,8 +76,15 @@ export class ContainerComponent implements OnInit, AfterViewInit {
 
 
   logOut(): void {
-    localStorage.removeItem('adminAccessToken');
-    this.$router.navigateByUrl(LOGIN_ROUTE.url);
+    this.$dialogService.confirm(
+      status => {
+        if (status) {
+          localStorage.removeItem('adminAccessToken');
+          this.$router.navigateByUrl(LOGIN_ROUTE.url);
+        }
+      },
+      'Are you sure?'
+    );
   }
 
 }

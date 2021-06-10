@@ -12,15 +12,17 @@ export class DialogService {
   ) { }
 
   confirm(
-    message: string,
     cb,
+    message: string,
+    message2 = '',
     yBtnTxt = 'Yes',
     nBtnTxt = 'No'
   ): void {
     const data = {
       message,
       yBtnTxt,
-      nBtnTxt
+      nBtnTxt,
+      message2
     };
     const $dialogRef = this.$dialog.open(
       ConfirmComponent,

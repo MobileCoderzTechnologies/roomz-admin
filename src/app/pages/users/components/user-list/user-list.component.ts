@@ -5,6 +5,7 @@ import { from, fromEvent } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/modals/user.modal';
 import { AlertService } from 'src/app/modules/alert/alert.service';
+import { DialogService } from 'src/app/modules/dialog/service/dialog.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
   searchElement: HTMLElement;
   constructor(
     private $userService: UserService,
-    private $alert: AlertService
+    private $alert: AlertService,
+    private $dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +52,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
         e.is_active = Boolean(e.is_active);
         return e;
       });
-      this.totalUser = data.perPage * (data.totalPages - 1) + data.totalNumber;
+      this.totalUser = data.totalNumber;
     });
   }
 
@@ -61,7 +63,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
     ).subscribe(event => {
       this.search = event.target.value;
       this.page = 1;
-      this.getUserList();
+      if (this.search && this.search.trim()) {
+        this.getUserList();
+      }
+      if (!this.search) {
+        this.getUserList();
+      }
     });
   }
 
@@ -93,6 +100,18 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   deleteUser(userId: string): void {
+    this.$dialogService.confirm(
+      (status) => {
+        if (status) {
+          this.deleteUser(userId);
+        }
+      },
+      'Are You Sure?',
+      'It will permanently deleted !'
+    );
+  }
+
+  deleting(userId: string): void {
     this.$userService.deleteUser(userId).subscribe(data => {
       this.$alert.info(data.message);
       this.getUserList();
