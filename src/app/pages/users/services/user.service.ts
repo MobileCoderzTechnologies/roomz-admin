@@ -13,13 +13,19 @@ export class UserService {
     private $http: HttpService
   ) { }
 
-  getUserList(page: number = 1, search?: string): Observable<UserList> {
+  getUserList(
+    page: number = 1,
+    pageSize: number,
+    sort: string,
+    search?: string): Observable<UserList> {
     let params = new HttpParams();
     params = params.set('page', page.toString());
+    params = params.set('pageSize', pageSize.toString());
+    params = params.set('sort', sort);
     if (search) {
       params = params.set('search', search);
     }
-    return this.$http.get('users-list', params);
+    return this.$http.get('users', params);
   }
 
   deleteUser(userId: string): Observable<{ message: string, status: number }> {
@@ -31,15 +37,28 @@ export class UserService {
   }
 }
 
+// interface UserList {
+//   'users': User[];
+//   'totalNumber': number;
+//   'perPage': number;
+//   'currentPage': number;
+//   'firstPage': number;
+//   'isEmpty': boolean;
+//   'totalPages': number;
+//   'lastPage': number;
+//   'hasMorePages': boolean;
+//   'hasPages': boolean;
+// };
+
 interface UserList {
-  'users': User[];
-  'totalNumber': number;
-  'perPage': number;
-  'currentPage': number;
-  'firstPage': number;
-  'isEmpty': boolean;
-  'totalPages': number;
-  'lastPage': number;
-  'hasMorePages': boolean;
-  'hasPages': boolean;
+  'users': {
+    'meta': {
+      'total': number;
+      'per_page': number;
+      'current_page': number;
+      'last_page': number;
+      'first_page': number;
+    };
+    'data': User[];
+  }
 }

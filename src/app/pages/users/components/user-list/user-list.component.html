@@ -79,9 +79,10 @@
       <tr mat-header-row *matHeaderRowDef="columnToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnToDisplay;let i = index" class="data-row"></tr>
     </table>
-    <mat-paginator *ngIf="totalUser" [length]="totalUser" [pageSize]="limit" (page)="pageChange($event)"></mat-paginator>
+    <mat-paginator *ngIf="totalUser" [length]="totalUser" [pageSize]="limit" 
+    [pageSizeOptions]="[5,10,25,50]" (page)="pageChange($event)"></mat-paginator>
     <div class="no-data" *ngIf="!totalUser">
-      <h4>NO User Found</h4>
+      <span>NO User Found</span>
     </div>
   </div>
 

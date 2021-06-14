@@ -45,14 +45,16 @@ export class UserListComponent implements OnInit, AfterViewInit {
   private getUserList(): void {
     this.$userService.getUserList(
       this.page,
+      this.limit,
+      this.sort,
       this.search
     ).subscribe(data => {
-      this.users = data.users;
+      this.users = data.users.data;
       this.users = this.users.map(e => {
         e.is_active = Boolean(e.is_active);
         return e;
       });
-      this.totalUser = data.totalNumber;
+      this.totalUser = data.users.meta.total;
     });
   }
 
@@ -75,12 +77,15 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   pageChange(event: PageEvent): void {
     this.page = event.pageIndex + 1;
+    this.limit = event.pageSize;
     this.getUserList();
   }
 
   sortChange(sort: Sort): void {
-    console.log(sort);
-    const sortBy = sort.active;
+    let sortBy = sort.active;
+    if (sortBy === 'name') {
+      sortBy = 'first_name';
+    }
     if (sort.direction === 'asc') {
       this.sort = sortBy;
     } else if (sort.direction === 'desc') {

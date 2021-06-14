@@ -54,8 +54,12 @@ body {
   overflow-x: scroll;
   .no-data{
     width: 100%;
-    display: flex;
-    justify-content: center;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    span{
+      font-size: 2rem;
+    }
   }
   @include desktop-device {
     &::-webkit-scrollbar {
