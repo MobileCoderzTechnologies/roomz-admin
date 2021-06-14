@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordRoute = FORGOT_PASSWORD_ROUTE;
   loginForm: FormGroup = this.$loginService.loginForm();
   isLoading = false;
+  hide = true;
   constructor(
     private $router: Router,
     private $loginService: LoginService,

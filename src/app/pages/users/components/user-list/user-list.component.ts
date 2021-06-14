@@ -108,7 +108,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.$dialogService.confirm(
       (status) => {
         if (status) {
-          this.deleteUser(userId);
+          this.deleting(userId);
         }
       },
       'Are You Sure?',
