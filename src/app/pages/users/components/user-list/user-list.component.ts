@@ -17,13 +17,15 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
 
   users: User[];
-  totalUser = 0;
+  totalUser = 1;
 
   columnToDisplay = ['sn', 'image', 'name', 'email', 'isVerified', 'moreInfo', 'action'];
   page = 1;
   limit = 10;
   sort = '';
   search = '';
+
+  isLoading = false;
 
 
 
@@ -43,6 +45,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   private getUserList(): void {
+    this.isLoading = true;
     this.$userService.getUserList(
       this.page,
       this.limit,
@@ -55,6 +58,9 @@ export class UserListComponent implements OnInit, AfterViewInit {
         return e;
       });
       this.totalUser = data.users.meta.total;
+      this.isLoading = false;
+    }, err => {
+      this.isLoading = false;
     });
   }
 

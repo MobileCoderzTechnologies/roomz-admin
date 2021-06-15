@@ -58,14 +58,6 @@ export class ContainerComponent implements OnInit, AfterViewInit {
           this.opened = true;
         }
       });
-
-    this.$loader.isLoading
-      .pipe(
-        delay(0)
-      )
-      .subscribe(data => {
-        this.isLoading = data;
-      });
   }
 
   onClickRoomzLogo(): void {
