@@ -18,18 +18,23 @@
   .txt-primary {
     color: $primary-color !important;
   }
+
   .txt-secondary {
     color: $secondary-color !important;
   }
+
   .txt-warn {
     color: $warn-color !important;
   }
+
   .txt-accent {
     color: $accent-color;
   }
+
   .border-accent {
     border: 0.1rem solid $accent-color;
   }
+
   .bg-primary {
     background-color: $primary-color !important;
   }
@@ -47,14 +52,12 @@
   }
 
   .bg-gradient {
-    background: linear-gradient(
-      to right,
-      $primary-color 0%,
-      $primary-color 50%,
-      $primary-color,
-      $accent-color 50%,
-      $accent-color
-    );
+    background: linear-gradient(to right,
+        $primary-color 0%,
+        $primary-color 50%,
+        $primary-color,
+        $accent-color 50%,
+        $accent-color);
   }
 
   .content {
@@ -63,6 +66,7 @@
     padding: 1rem;
     box-sizing: border-box;
     border: 1px solid $primary-color;
+
     h1 {
       // width: 100%;
       margin-left: 2rem;
@@ -80,21 +84,37 @@
     padding: 0.4rem;
   }
 
-  .search-bar {
-    border-bottom: 0.1rem solid $primary-color;
+  .search-bar-box {
     width: 30%;
-    height: 3rem;
+    height: 30px;
+    box-sizing: border-box;
+    border: 0.1rem solid #e91e63;
+    padding: .5rem;
     background-color: #fff;
-    input {
-      border: none;
-      outline: none;
+    border-radius: 1.6rem;
+    display: flex;
+    margin-right: .5rem;
+    overflow: hidden;
+    max-width: 22rem;
+
+    .search-bar {
       height: 100%;
       width: 100%;
-      font-size: 1.6rem;
-      &::placeholder{
-        color: $accent-color;
-        height: 3rem;
+      display: flex;
+
+      input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 1.6rem;
+
+        &::placeholder {
+          color: $accent-color;
+          height: 3rem;
+        }
       }
     }
+
   }
+
 }

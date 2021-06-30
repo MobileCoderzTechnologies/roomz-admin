@@ -3,8 +3,8 @@
   <div class="mid-bar">
     <!-- <span class="total-box">Total Users : {{totalUser}}</span> -->
     <span></span>
-    <div class="search-bar">
-      <input type="search" placeholder="search user" id="search">
+    <div class="search-bar-box">
+      <app-search [searchPlaceholder]="'search user'"  (onSearch)="onSearch($event)"></app-search>
     </div>
   </div>
   <hr>
@@ -12,7 +12,7 @@
     <div class="loader" *ngIf="isLoading">
       <mat-spinner [strokeWidth]="5" color="accent"></mat-spinner>
     </div>
-    <div [style.opacity]="isLoading?'0.4':'1'">
+    <div *ngIf="!isLoading">
       <table mat-table [dataSource]="users" matSort matSortActive="addedAt" matSortDirection="desc"
         (matSortChange)="sortChange($event)">
 

@@ -17,11 +17,11 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
     CommonModule,
     UsersRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
     SharedModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class UsersModule { }

@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { from, fromEvent } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/modals/user.modal';
 import { AlertService } from 'src/app/modules/alert/alert.service';
 import { DialogService } from 'src/app/modules/dialog/service/dialog.service';
@@ -13,7 +11,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, AfterViewInit {
+export class UserListComponent implements OnInit {
 
 
   users: User[];
@@ -40,10 +38,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.getUserList();
   }
 
-  ngAfterViewInit(): void {
-    this.onSearch();
-  }
-
   private getUserList(): void {
     this.isLoading = true;
     this.$userService.getUserList(
@@ -64,22 +58,11 @@ export class UserListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private onSearch(): void {
-    this.searchElement = document.getElementById('search');
-    fromEvent<any>(this.searchElement, 'input').pipe(
-      debounceTime(500),
-    ).subscribe(event => {
-      this.search = event.target.value;
-      this.page = 1;
-      if (this.search && this.search.trim()) {
-        this.getUserList();
-      }
-      if (!this.search) {
-        this.getUserList();
-      }
-    });
-  }
 
+  onSearch(search: string): void{
+    this.search = search;
+    this.getUserList();
+  }
 
   pageChange(event: PageEvent): void {
     this.page = event.pageIndex + 1;

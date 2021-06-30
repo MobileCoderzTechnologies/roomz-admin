@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from '../alert/alert.module';
 import { DialogModule } from '../dialog/dialog.module';
 import { ValidateErrorModule } from '../validate-error/validate-error.module';
+import { SearchModule } from '../search/search.module';
 
 
 
@@ -14,13 +15,15 @@ import { ValidateErrorModule } from '../validate-error/validate-error.module';
     ReactiveFormsModule,
     AlertModule,
     DialogModule,
-    ValidateErrorModule
+    ValidateErrorModule,
+    SearchModule
   ],
   exports: [
     ReactiveFormsModule,
     AlertModule,
     DialogModule,
-    ValidateErrorModule
+    ValidateErrorModule,
+    SearchModule
   ]
 })
 export class SharedModule { }

@@ -54,7 +54,10 @@ export class HttpService {
   private errorHandler(response: any): Observable<{ error: string, message: string }> {
     const error = response.error;
     const status = response.status;
-    const message = error.message;
+    let message = error.message;
+    if (error.isTrusted) {
+      message = 'No Internet Connection';
+    }
     this.$alert.danger(message);
     if (status === 401) {
       sessionStorage.clear();
