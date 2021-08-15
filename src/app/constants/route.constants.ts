@@ -33,3 +33,10 @@ export const USER_ROUTE = {
     return `/${this.path}`;
   }
 };
+
+export const PROPERTY_ROUTE = {
+  path: 'properties',
+  get url(): string {
+    return `/${this.path}`;
+  }
+};

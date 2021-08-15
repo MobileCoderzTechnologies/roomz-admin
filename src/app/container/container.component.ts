@@ -3,7 +3,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from '../constants/route.constants';
+import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, LOGIN_ROUTE, PROPERTY_ROUTE, USER_ROUTE } from '../constants/route.constants';
 import { DialogService } from '../modules/dialog/service/dialog.service';
 import { LoadingService } from '../services/loading.service';
 
@@ -17,6 +17,7 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   dashboardRoute = DASHBOARD_ROUTE;
   userRoute = USER_ROUTE;
   changePasswordRoute = CHANGE_PASSWORD_ROUTE;
+  propertyRoute = PROPERTY_ROUTE;
 
   mode = 'side';
   opened = true;

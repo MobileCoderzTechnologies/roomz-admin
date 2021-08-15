@@ -4,7 +4,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, LOGIN_ROUTE, USER_ROUTE } from './constants/route.constants';
+import { CHANGE_PASSWORD_ROUTE, DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, LOGIN_ROUTE, PROPERTY_ROUTE, USER_ROUTE } from './constants/route.constants';
 import { ContainerComponent } from './container/container.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProtectGuard } from './guards/protect.guard';
@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: USER_ROUTE.path,
         loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: PROPERTY_ROUTE.path,
+        loadChildren: () => import('./pages/properties/properties.module').then(m => m.PropertiesModule)
       },
       {
         path: CHANGE_PASSWORD_ROUTE.path,

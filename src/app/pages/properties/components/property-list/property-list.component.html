@@ -1,0 +1,114 @@
+<div class="content">
+  <h1>USER LIST</h1>
+  <div class="mid-bar">
+    <!-- <span class="total-box">Total Users : {{totalUser}}</span> -->
+    <span></span>
+    <div class="search-bar-box">
+      <app-search [searchPlaceholder]="'search property'"  (onSearch)="onSearch($event)"></app-search>
+    </div>
+  </div>
+  <hr>
+  <div class="mat-elevation-z8 table-responsive" style="position: relative;">
+    <div class="loader" *ngIf="isLoading">
+      <mat-spinner [strokeWidth]="5" color="accent"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+      <table mat-table [dataSource]="properties" matSort matSortActive="addedAt" matSortDirection="desc"
+        (matSortChange)="sortChange($event)">
+
+        <!-- columns start -->
+        <!-- serial number -->
+        <ng-container matColumnDef="sn">
+          <th mat-header-cell *matHeaderCellDef>S.N.</th>
+          <td mat-cell *matCellDef="let row; let i = index">
+            {{(page-1)*10+(i+1)}}.
+          </td>
+        </ng-container>
+        <!-- Image -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="property-image" *ngIf="row?.cover_photo">
+              <img src="{{row?.cover_photo}}" alt="cover_photo">
+            </div>
+            <div class="user-image" *ngIf="!row?.cover_photo">
+              <img src="assets/images/person.png" alt="property">
+            </div>
+          </td>
+        </ng-container>
+        <!-- Name  -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Name of Listing</th>
+          <td mat-cell *matCellDef="let row">{{row?.name}}</td>
+        </ng-container>
+        <!-- Email  -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef>Location</th>
+          <td mat-cell *matCellDef="let row">{{row.city}}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="no_of_beds">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Beds</th>
+          <td mat-cell *matCellDef="let row">
+            {{row?.no_of_beds}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="no_of_bedrooms">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Bedrooms</th>
+          <td mat-cell *matCellDef="let row">
+            {{row?.no_of_bedrooms}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="no_of_bathrooms">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Bathrooms</th>
+          <td mat-cell *matCellDef="let row">
+            {{row?.no_of_bathrooms}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="no_of_guests">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Guests</th>
+          <td mat-cell *matCellDef="let row">
+            {{row?.no_of_guests}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="moreInfo">
+          <th mat-header-cell *matHeaderCellDef>More Info</th>
+          <td mat-cell *matCellDef="let row">
+            <button class="view-btn txt-accent border-accent">View</button>
+          </td>
+        </ng-container>
+
+        <!-- buttons  -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="action">
+              <mat-slide-toggle [checked]="row?.status" (change)="statusChange($event, row.uid)">
+              </mat-slide-toggle>
+
+              <button (click)="deleteUser(row.uid)" class="txt-warn">Delete</button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- buttons end  -->
+        <!-- columns end  -->
+
+        <!-- row start  -->
+        <tr mat-header-row *matHeaderRowDef="columnToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnToDisplay;let i = index" class="data-row"></tr>
+      </table>
+    </div>
+    <mat-paginator *ngIf="totalProperties" [length]="totalUser" [pageSize]="limit" [pageSizeOptions]="[5,10,25,50]"
+      (page)="pageChange($event)"></mat-paginator>
+    <div class="no-data" *ngIf="!totalProperties && !isLoading">
+      <span>NO User Found</span>
+    </div>
+  </div>
+
+</div>
