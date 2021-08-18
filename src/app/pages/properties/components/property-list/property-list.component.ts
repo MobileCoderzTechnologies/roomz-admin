@@ -4,6 +4,7 @@ import { Sort } from '@angular/material/sort';
 import { PROPERTY_STATUS } from 'src/app/constants/property.constant';
 import { AlertService } from 'src/app/modules/alert/alert.service';
 import { DialogService } from 'src/app/modules/dialog/service/dialog.service';
+import { PROPERTY_DETAIL_ROUTE } from '../../constants/route.constant';
 import { PropertyService } from '../../services/property.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { PropertyService } from '../../services/property.service';
   styleUrls: ['./property-list.component.scss']
 })
 export class PropertyListComponent implements OnInit {
+
+  propertyDetailRoute = PROPERTY_DETAIL_ROUTE;
 
   properties: any[];
   totalProperties = 1;

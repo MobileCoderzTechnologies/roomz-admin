@@ -14,6 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatSelectModule} from '@angular/material/select';
 
 const modules = [
   MatToolbarModule,
@@ -29,7 +31,9 @@ const modules = [
   MatSortModule,
   MatPaginatorModule,
   MatSliderModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatSelectModule
 ];
 
 @NgModule({

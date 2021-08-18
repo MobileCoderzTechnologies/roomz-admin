@@ -3,7 +3,7 @@ import { PROPERTY_ROUTE } from 'src/app/constants/route.constants';
 export const PROPERTY_LIST_ROUTE = {
   path: 'list',
   get url(): string {
-    return `${PROPERTY_ROUTE}/${this.path}`;
+    return `${PROPERTY_ROUTE.url}/${this.path}`;
   }
 };
 

@@ -32,8 +32,12 @@ export class PropertyService {
     return this.$http.delete(`delete-property/${propertyId}`);
   }
 
-  toggleStatusOfProperty(userId: string): Observable<{ status: number, message: string, property: any }> {
-    return this.$http.get(`block-property/${userId}`);
+  toggleStatusOfProperty(propertyId: string): Observable<{ status: number, message: string, property: any }> {
+    return this.$http.get(`block-property/${propertyId}`);
+  }
+
+  getPropertyDetails(id: number): Observable<any>{
+    return this.$http.get(`property-details/${id}`);
   }
 }
 

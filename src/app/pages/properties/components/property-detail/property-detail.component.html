@@ -1,1 +1,506 @@
-<p>property-detail works!</p>
+<div class="property-container">
+  <div class="top">
+    <button mat-button routerLink="{{propertyListRoute.url}}">
+      <mat-icon [inline]="true">arrow_back</mat-icon>
+      All Listing
+    </button>
+  </div>
+
+  <div class="mid-box">
+    <div class="mid-box-item">
+      <div class="slider">
+        <ng-container *ngFor="let slide of propertyImages; let i = index">
+          <div *ngIf="i===currentSlide" class="slide">
+            <img [src]="slide.image_url">
+          </div>
+        </ng-container>
+
+        <button mat-mini-fab class="navigate-left" (click)="navigateLeft()">
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+
+        <button mat-mini-fab class="navigate-right" (click)="navigateRight()">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="mid-box-item info">
+      <div class="basic-info">
+        <h1>
+          {{property?.name}} In {{property?.city}}
+        </h1>
+        <h3 class="txt-primary">
+          ${{property?.base_price}} /Night
+        </h3>
+        <p>
+          {{property?.city | titlecase}},
+          {{property?.state|titlecase}},
+          {{property?.country|titlecase}}
+        </p>
+
+        <div>
+          <p class="blur-txt">
+            Max # Guests allowed
+          </p>
+          <p class="max-number">
+            {{property?.no_of_guests}}
+          </p>
+        </div>
+        <div>
+          <p class="blur-txt">
+            Max # of Bedrooms
+          </p>
+          <p class="max-number">
+            {{property?.no_of_bedrooms}}
+          </p>
+        </div>
+        <div>
+          <p class="blur-txt">
+            Max # of Bathrooms
+          </p>
+          <p class="max-number">
+            {{property?.no_of_bathrooms}}
+          </p>
+        </div>
+
+
+      </div>
+
+      <div class="action">
+        <h3>Change Status?</h3>
+        <mat-form-field appearance="fill">
+          <label>Select Action</label>
+          <mat-select (selectionChange)="onAction($event)">
+            <mat-option *ngIf="property?.status !== propertyStatus.listed" [value]="propertyStatus.listed"> Approve
+            </mat-option>
+            <mat-option *ngIf="property?.status !== propertyStatus.blocked" [value]="propertyStatus.blocked"> Block
+            </mat-option>
+            <mat-option *ngIf="property?.status === propertyStatus.blocked" [value]="propertyStatus.listed"> Unblock
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="details-box">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="About">
+        <div class="tab-content">
+          <div class="desc">
+            <h3 class="heading">
+              Description
+            </h3>
+            <p>
+              {{property?.description}}
+            </p>
+          </div>
+
+          <div class="desc">
+            <h3 class="heading">
+              More description
+            </h3>
+
+            <div class="more-desc">
+              <h3>Spaces</h3>
+              <p>
+                {{property?.desc_your_space}}
+              </p>
+            </div>
+
+            <div class="more-desc">
+              <h3>Interaction with guests</h3>
+              <p>
+                {{property?.desc_interaction_guests}}
+              </p>
+            </div>
+
+            <div class="more-desc">
+              <h3>Neighbourhood</h3>
+              <p>
+                {{property?.desc_neighbourhood}}
+              </p>
+            </div>
+
+            <div class="more-desc">
+              <h3>Getting around</h3>
+              <p>
+                {{property?.desc_getting_around}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Space and Bedroom">
+        <div class="tab-content">
+          <table class="bedrooms-table">
+            <tr>
+              <th>Bedroom</th>
+              <th>Sofa Bed</th>
+              <th>Floor Matters</th>
+              <th>Double Bed</th>
+              <th>King Bed</th>
+              <th>Queen Bed</th>
+              <th>Single Bed </th>
+              <th>Small Double </th>
+              <th>Couch </th>
+              <th>Bunk Bed </th>
+            </tr>
+            <ng-container *ngFor="let count of noOfBedroomArr">
+              <tr>
+                <td> {{count===0?'Common Space':'bedroom'}} {{count?count: ''}} </td>
+                <td>{{checkBedExists(count, 4)}} </td>
+                <td>{{checkBedExists(count, 9)}} </td>
+                <td>{{checkBedExists(count, 1)}} </td>
+                <td>{{checkBedExists(count, 5)}} </td>
+                <td>{{checkBedExists(count, 2)}} </td>
+                <td>{{checkBedExists(count, 3)}} </td>
+                <td>{{checkBedExists(count, 6)}} </td>
+                <td>{{checkBedExists(count, 7)}} </td>
+                <td>{{checkBedExists(count, 8)}} </td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Location">
+        <div class="tab-content">
+          <div class="location">
+            <div class="location-item">
+              <div class="mat-elevation-z2">
+                <p>
+                  Country/Region
+                </p>
+                <p>
+                  {{property?.country}}
+                </p>
+              </div>
+
+              <div class="item">
+                <p class="key">
+                  Street
+                </p>
+                <p>
+                  {{property?.street}}
+                </p>
+              </div>
+              <div class="item">
+                <p class="key">
+                  Apt, Suite etc Optional
+                </p>
+                <p>
+                  {{property?.address_optional}}
+                </p>
+              </div>
+
+              <div class="item">
+                <p class="key">
+                  City
+                </p>
+                <p>
+                  {{property?.city}}
+                </p>
+              </div>
+
+            </div>
+            <div class="location-item">
+              <div class="item">
+                <p class="key">
+                  State
+                </p>
+                <p>
+                  {{property?.state}}
+                </p>
+              </div>
+
+              <div class="item">
+                <p class="key">
+                  Zip / Postal Code
+                </p>
+                <p>
+                  {{property?.zip_code}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Amenities">
+        <div class="tab-content">
+          <h2 style="font-weight: bold;">General</h2>
+          <div class="amenity">
+            <ng-container *ngFor="let amenity of amenityNormal">
+              <p class="amenity-item">
+                {{amenity.amenity_name.name}}
+              </p>
+            </ng-container>
+          </div>
+
+          <h2 style="font-weight: bold;">Space</h2>
+          <div class="amenity">
+            <ng-container *ngFor="let amenity of amenitySpace">
+              <p class="amenity-item">
+                {{amenity.amenity_name.name}}
+              </p>
+            </ng-container>
+          </div>
+
+          <h2 style="font-weight: bold;">Safety</h2>
+          <div class="amenity">
+            <ng-container *ngFor="let amenity of amenitySafety">
+              <p class="amenity-item">
+                {{amenity.amenity_name.name}}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Guests Requirements">
+        <div class="tab-content">
+          <h2>
+            Guest Requirements
+          </h2>
+
+          <div class="guest-requirement">
+            <div>
+              <mat-icon> {{property?.is_email_confirmed?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Confirmed
+                Email
+                Address</span>
+            </div>
+            <div>
+              <mat-icon> {{property?.is_phone_confirmed?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Confirmed
+                Phone
+                Number</span>
+            </div>
+            <div>
+              <mat-icon> {{property?.is_payment_information?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Payment
+                Information</span>
+            </div>
+
+            <div>
+              <mat-icon> {{property?.is_agree_hr?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Agree to your House
+                Rules</span>
+            </div>
+
+            <div>
+              <mat-icon> {{property?.is_trip_purpose?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Tell You their
+                Trip Purpose</span>
+            </div>
+
+            <div>
+              <mat-icon> {{property?.is_id_submitted?'check': 'clear'}} </mat-icon> &nbsp; &nbsp; <span>Government
+                Issued
+                Id Submitted</span>
+            </div>
+
+            <div>
+              <mat-icon> {{property?.is_recommended_from_oh?'check': 'clear'}} </mat-icon> &nbsp; &nbsp;
+              <span>Recommendation from Other Hosts</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="House Rules">
+        <div class="tab-content">
+          <h2>
+            House Rule set by the Host
+          </h2>
+          <div class="house-rules">
+            <ng-container *ngFor="let rule of houseRules">
+              <div class="rule">
+                <div>
+                  <mat-icon>
+                    {{rule?.is_cancelled?'clear': 'check'}}
+                  </mat-icon>
+                  &nbsp; &nbsp;
+                  <span *ngIf="!rule.is_additional">
+                    {{rule?.rule?.rule}}
+                  </span>
+                  <span *ngIf="rule.is_additional">
+                    {{rule?.description}}
+                  </span>
+                </div>
+                <p class="reason" *ngIf="rule.is_cancelled">
+                  {{rule.cancel_reason}}
+                </p>
+              </div>
+            </ng-container>
+          </div>
+
+          <br>
+          <br>
+          <h2>
+            Details guest should know about the house
+          </h2>
+
+          <div class="details">
+            <ng-container *ngFor="let detail of property?.details">
+              <div class="detail">
+                <p> {{detail?.detail?.name}} </p>
+                <p class="blur-txt">
+                  {{detail.explanation}}
+                </p>
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Host Details">
+        <div class="tab-content">
+          <div class="about-host">
+            <div class="user">
+              <div>
+                <img [src]="property?.user?.avatar" class="user-photo">
+              </div>
+              <div>
+                <p class="user-name"> {{property?.user?.first_name | titlecase}} {{property?.user?.last_name
+                  |titlecase}} </p>
+
+                <small class="blur-txt">Hosting since June 2021</small>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p>Rented out this place before ?</p>
+            <p class="blur-txt">
+              {{property?.rented_before ===1?'Yes': 'No'}}
+            </p>
+          </div>
+
+          <div>
+            <p>How often does the Host want to have guests ?</p>
+            <p class="blur-txt">
+              {{property?.have_guests === 3?'Yes': 'No'}}
+            </p>
+          </div>
+
+          <div>
+            <p>How much Notice does the host want ?</p>
+            <ng-container *ngFor="let gn of guestNotice">
+              <p class="blur-txt" *ngIf="gn.value === property?.notice_guest_ba">
+                {{gn.display}}
+              </p>
+            </ng-container>
+
+          </div>
+
+
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Timings">
+        <div class="tab-content">
+          <div class="timing">
+
+            <div class="flex">
+              <p class="blur-txt">
+                Check In :
+              </p>
+              <p>
+                {{property?.guest_ci_from|formatTime}}
+              </p>
+            </div>
+
+            <div class="flex">
+              <p class="blur-txt">
+                Check Out :
+              </p>
+              <p>
+                {{property?.guest_ci_to|formatTime}}
+              </p>
+            </div>
+
+            <div>
+              <p class="blur-txt">Advance Notice</p>
+              <ng-container *ngFor="let an of advanceNotice">
+                <p *ngIf="an.value === property?.advance_notice">
+                  {{an.display}}
+                </p>
+              </ng-container>
+            </div>
+
+            <div>
+              <p class="blur-txt">
+                Same day requests
+              </p>
+              <p>
+                {{property?.cut_off_time|formatTime}}
+              </p>
+            </div>
+
+            <div>
+              <p class="blur-txt">
+                Arrive before
+              </p>
+              <p>
+                {{property?.ci_arrive_before|formatTime}}
+              </p>
+            </div>
+            <div>
+              <p class="blur-txt">
+                Leave before
+              </p>
+              <p>
+                {{property?.ci_leave_before|formatTime}}
+              </p>
+            </div>
+            <div>
+              <p class="blur-txt">
+                Arrive before
+              </p>
+              <p>
+                {{property?.ci_arrive_after|formatTime}}
+              </p>
+            </div>
+
+            <div>
+              <p class="blur-txt">
+                Trip Length
+              </p>
+              <p>
+                Min {{property?.min_stay}} days
+              </p>
+              <p>
+                Max {{property?.max_stay}} days
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+      </mat-tab>
+
+
+      <mat-tab label="Discounts">
+        <div class="tab-content">
+          <h1>
+            Discounts
+          </h1>
+
+          <table class="table-dis">
+            <tr>
+              <td>Discount for <strong> 7 days or more</strong></td>
+              <td> {{property?.weekly_discount}}% </td>
+            </tr>
+            <tr>
+              <td>Discount for <strong>28 days or more</strong></td>
+              <td> {{property?.monthly_discount}}% </td>
+            </tr>
+          </table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

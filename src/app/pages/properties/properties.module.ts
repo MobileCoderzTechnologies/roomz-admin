@@ -5,6 +5,8 @@ import { PropertyDetailComponent } from './components/property-detail/property-d
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { PropertiesRoutingModule } from './properties-routing.module';
+import {CarouselModule} from 'ngx-owl-carousel-o';
+import { FormatTimeModule } from 'src/app/modules/format-time/format-time.module';
 
 
 
@@ -17,12 +19,16 @@ import { PropertiesRoutingModule } from './properties-routing.module';
     CommonModule,
     SharedModule,
     MaterialModule,
-    PropertiesRoutingModule
+    PropertiesRoutingModule,
+    CarouselModule,
+    FormatTimeModule
   ],
   exports: [
     SharedModule,
     MaterialModule,
-    PropertiesRoutingModule
+    PropertiesRoutingModule,
+    CarouselModule,
+    FormatTimeModule
   ]
 })
 export class PropertiesModule { }

@@ -16,7 +16,7 @@ const routes: Routes = [
     component: PropertyListComponent
   },
   {
-    path: `${PROPERTY_DETAIL_ROUTE.path}/:userId`,
+    path: `${PROPERTY_DETAIL_ROUTE.path}/:id`,
     component: PropertyDetailComponent
   }
 ];
