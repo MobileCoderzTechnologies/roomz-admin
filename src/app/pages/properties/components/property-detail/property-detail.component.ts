@@ -42,6 +42,8 @@ export class PropertyDetailComponent implements OnInit {
     [key: string]: any[]
   } = {};
 
+  isLoading = false;
+
   constructor(
     private $activatedRoute: ActivatedRoute,
     private $alert: AlertService,
@@ -57,6 +59,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   private getProperty(): void {
+    this.isLoading = true;
     this.$propertyService.getPropertyDetails(this.propertyId).subscribe(data => {
       this.property = data.data[0];
       this.propertyImages.push({ image_url: this.property.cover_photo });
@@ -73,6 +76,9 @@ export class PropertyDetailComponent implements OnInit {
       console.log(this.property);
 
       this.onGroupBeds(this.property?.beds);
+      this.isLoading = false;
+    }, err => {
+      this.isLoading = false;
     });
   }
 
@@ -121,8 +127,13 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   onAction(event): void {
-    this.$propertyService.toggleStatusOfProperty(this.property?.uid).subscribe(data => {
+    this.isLoading = true;
+    const status = Number(event.value);
+    this.$propertyService.toggleStatusOfProperty(this.property?.uid, status).subscribe(data => {
       console.log(data);
+      this.getProperty();
+    }, (err) => {
+      this.isLoading = false;
     });
   }
 

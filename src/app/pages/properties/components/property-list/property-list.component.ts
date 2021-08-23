@@ -28,6 +28,7 @@ export class PropertyListComponent implements OnInit {
   search = '';
 
   isLoading = false;
+  totalCount = 0;
 
 
 
@@ -51,6 +52,7 @@ export class PropertyListComponent implements OnInit {
       this.search
     ).subscribe(data => {
       this.properties = data.properties.data;
+      this.totalCount = data.properties.meta.total;
       this.properties = this.properties.map(e => {
         if (e.status === PROPERTY_STATUS.blocked) {
           e.status = false;
@@ -91,12 +93,12 @@ export class PropertyListComponent implements OnInit {
     this.getPropertyList();
   }
 
-  statusChange(isActive: boolean, propertyId: string): void {
-    this.$propertyService.toggleStatusOfProperty(propertyId).subscribe(data => {
-      this.$alert.success(data.message);
-      this.getPropertyList();
-    });
-  }
+  // statusChange(isActive: boolean, propertyId: string): void {
+  //   this.$propertyService.toggleStatusOfProperty(propertyId).subscribe(data => {
+  //     this.$alert.success(data.message);
+  //     this.getPropertyList();
+  //   });
+  // }
 
   deleteUser(propertyId: string): void {
     this.$dialogService.confirm(
