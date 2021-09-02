@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://127.0.0.1:3333/admin/'
-  apiUrl: 'http://15.184.122.99/admin/'
+  // apiUrl: 'http://15.184.122.99/admin/'
+  apiUrl: 'https://api.roomz.site/admin/'
 };
 
 /*
